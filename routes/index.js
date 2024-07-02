@@ -9,11 +9,19 @@ router.post('/register', registerController.register);
 
 router.post('/login', loginController.login);
 
-router.get('/getUser', userAuth, userController.getUser);
+router.get('/getuser', userAuth, userController.getUser);
+
+router.get('/getalluser', [userAuth, admin],  userController.getAllUser);
+
+router.delete('/deleteuser/:id', [userAuth, admin], userController.deleteUser);
+
+router.put('/updateuser/:id', [userAuth, admin], userController.updateUsers);
 
 router.post('/getAccessToken', refreshController.refreshMethod);
 
 router.post('/logout', userAuth, loginController.logout);
+
+router.get('/getuserinfo/:id', [userAuth, admin] , userController.getuserinfo);
 
 //product section
 
@@ -26,5 +34,8 @@ router.delete('/product/delete/:id', [userAuth, admin] ,deleteProduct.destroy);
 router.get('/product/getAll', [userAuth, admin], getAllProduct.getAll);
 
 router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
+
+// //trail route
+// router.get('/product/getAll', [userAuth, admin], getAllProduct.getAll)
 
 export default router;
