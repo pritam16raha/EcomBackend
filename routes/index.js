@@ -15,7 +15,7 @@ router.get('/getalluser', [userAuth, admin],  userController.getAllUser);
 
 router.delete('/deleteuser/:id', [userAuth, admin], userController.deleteUser);
 
-router.put('/updateuser/:id', [userAuth, admin], userController.updateUsers);
+router.put('/updateuser/:id', [userAuth, admin], userController.updateUser);
 
 router.post('/getAccessToken', refreshController.refreshMethod);
 

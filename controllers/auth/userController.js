@@ -38,15 +38,20 @@ const userController = {
         res.json(dropUser).status(200);
     },
 
-    async updateUsers(req, res, next) {
+    async updateUser(req, res, next) {
         try {
+            console.log(req.body)
+            
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+            const userData = req.body;
 
             const updatedUser = await UserModel.findByIdAndUpdate({ _id: req.params.id }, {
                 $set: {
                     "name": req.body.name,
                     "email": req.body.email,
                     "username":req.body.username,
+                    "role": req.body.role,
                     "password": hashedPassword
                 }
             }, { new: true });
