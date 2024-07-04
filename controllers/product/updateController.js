@@ -53,7 +53,7 @@ const updateController = {
                 }
             }
              
-            const { name, price, category } = req.body;
+            const { name, price, category, description } = req.body;
 
             let newDocument;
 
@@ -62,6 +62,7 @@ const updateController = {
                     name,
                     price,
                     category,
+                    description,
                     ...(req.file && { image: newFilePath })
                 }, {new: true});
 

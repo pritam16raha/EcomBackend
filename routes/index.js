@@ -25,7 +25,8 @@ router.get('/getuserinfo/:id', [userAuth, admin] , userController.getuserinfo);
 
 //product section
 
-router.post('/product/add', [userAuth, admin], productController.addProduct);
+// router.post('/product/add', [userAuth, admin], productController.addProduct);
+router.post('/product/upload', [userAuth, admin], productController.uploadProduct);
 
 router.put('/product/update/:id', [userAuth, admin] , updateController.updateProduct);
 
