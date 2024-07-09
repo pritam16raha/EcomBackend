@@ -4,6 +4,7 @@ import { deleteProduct, getAllProduct, getOneProduct, loginController, productCo
 import userController from '../controllers/auth/userController';
 import userAuth from '../middleware/userAuth';
 import admin from '../middleware/admin';
+import editProduct from '../controllers/product/editProduct';
 
 router.post('/register', registerController.register);
 
@@ -29,6 +30,8 @@ router.get('/getuserinfo/:id', [userAuth, admin] , userController.getuserinfo);
 router.post('/product/upload', [userAuth, admin], productController.uploadProduct);
 
 router.put('/product/update/:id', [userAuth, admin] , updateController.updateProduct);
+
+router.put('/product/edit/:id', [userAuth, admin] , editProduct.updateProduct);
 
 router.delete('/product/delete/:id', [userAuth, admin] ,deleteProduct.destroy);
 
