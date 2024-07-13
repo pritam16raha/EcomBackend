@@ -26,8 +26,6 @@ app.use('/ecom',router);
 
 app.use(errorHandler);
 
-
-
 app.listen(APP_KEY, () => console.log(`listening on port ${APP_KEY}`));
 
 mongoose.connect(ECOMDB).then(() => console.log("DB Connected! now get lost")).catch((err) => {

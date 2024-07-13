@@ -8,3 +8,4 @@ export { default as updateController } from './product/updateController';
 export { default as deleteProduct } from './product/deleteProduct';
 export { default as getAllProduct } from './product/getAllProduct';
 export { default as getOneProduct } from './product/getOneProduct';
+export { default as ordered } from './order/placeOrder';

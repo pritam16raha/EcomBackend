@@ -1,7 +1,6 @@
 import Joi from "joi";
 import productModelSchema from "../../models/productModel/productModelSchema";
 
-
 const productController = {
 
     async addProduct(req, res, next) {
