@@ -48,6 +48,10 @@ class CustomeErrorHandler extends Error {
     static serverError(message = "server error"){
         return new CustomeErrorHandler(511, message)
     }
+
+    static deleteNotPossible(message = "product deletion error"){
+        return new CustomeErrorHandler(512, message)
+    }
 }
 
 export default CustomeErrorHandler;
