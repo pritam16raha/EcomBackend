@@ -2,7 +2,7 @@ import express from 'express';
 
 const app = express();
 
-import {APP_KEY, ECOMDB} from './config';
+import {APP_KEY, ECOMDB, PORT} from './config';
 
 import router from './routes';
 
@@ -12,7 +12,7 @@ import CustomeErrorHandler from './customError/CustomErrorHandler';
 import path from 'path';
 import cors from "cors";
 
-
+const port = process.env.PORT || APP_KEY
 
 global.appRoot = path.resolve(__dirname); //appRoot is used in product->productController.js->line number 33
 
@@ -26,7 +26,7 @@ app.use('/ecom',router);
 
 app.use(errorHandler);
 
-app.listen(APP_KEY, () => console.log(`listening on port ${APP_KEY}`));
+app.listen(port, () => console.log(`listening on port ${port}`));
 
 mongoose.connect(ECOMDB).then(() => console.log("DB Connected! now get lost")).catch((err) => {
     CustomeErrorHandler.DbError("you can not connect database with backend, please die in peace!")
