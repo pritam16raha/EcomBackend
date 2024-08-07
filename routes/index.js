@@ -48,7 +48,11 @@ router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
 //token get
 router.get("")
 //order post routes
-router.post('/orderplace', userAuth, ordered.order)
+router.post('/orderplace', userAuth, ordered.order);
+
+router.get('/getorder', userAuth, ordered.getPlacedOrder);
+
+router.get('/getallorder', userAuth, ordered.getAllOrder);
 //for payment
 router.post("/order/:id", userAuth, async(req, res) => {
     //1. total cost 2. product id: [] 3. userid
@@ -63,7 +67,7 @@ router.post("/order/:id", userAuth, async(req, res) => {
     const totalCost = productModel.price * productQuantity;
 
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: totalCost*100*80,
+        amount: totalCost*100,
         currency: "inr",
         metadata: {
             productId,

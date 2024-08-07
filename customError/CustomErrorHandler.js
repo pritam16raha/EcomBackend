@@ -52,6 +52,10 @@ class CustomeErrorHandler extends Error {
     static deleteNotPossible(message = "product deletion error"){
         return new CustomeErrorHandler(512, message)
     }
+
+    static failedOrder(message= "order details can not be fetched"){
+        return new CustomeErrorHandler(513, message)
+    }
 }
 
 export default CustomeErrorHandler;

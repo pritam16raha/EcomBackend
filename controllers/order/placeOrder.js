@@ -1,6 +1,8 @@
+import CustomeErrorHandler from "../../customError/CustomErrorHandler";
 import { orderModel } from "../../models";
 import { UserModel } from "../../models";
 import Stripe from "stripe";
+
 
 const stripe = new Stripe(process.env.STRIPE_SK)
 
@@ -9,8 +11,11 @@ const placeOrder = {
         try{
             const newOrder = new orderModel({
                 userId: req.body.id,
-                items: req.body.items,
+                username: req.body.currentUser.username,
+                items: req.body.cart,
                 amount: req.body.cartTotal,
+                status: "Payment Done",
+                payment:true
             }) 
             await newOrder.save();
             // await UserModel.findByIdAndUpdate(req.body._id, {cartData: {}})
@@ -21,7 +26,7 @@ const placeOrder = {
                     product_data: {
                         name: item.name
                     },
-                    unit_amount: item.price*100*80
+                    unit_amount: item.price*100
                 },
                 quantity: 1
             }))
@@ -41,15 +46,47 @@ const placeOrder = {
                 payment_method_types:["card"],
                 line_items: line_items,
                 mode: 'payment',
-                success_url: "https://www.pritamraha.in",
+                success_url: "http://localhost:5173/order",
+                
                 // cancel_url: ""
             })
-
             res.json({ success: true, session_url: session.url })
+
         }catch(err){
             console.log("Error from place order order function catch block", err);
             res.json({ seccess: false, message: "error" })
         }
+    },
+
+    async getPlacedOrder(req, res, next){
+        try{
+            const orders = await orderModel.findById( req.body.id );
+            const user = await UserModel.findById(orders.userId);
+            // res.json({user})
+            res.json({orders, user})
+            //res.json({user})
+            console.log({user})
+        }catch(err){
+            return next(CustomeErrorHandler.failedOrder("Order details can not be fetched"))
+        }
+    },
+
+    async getAllOrder (req, res, next){
+        let getOrder;
+        try{
+            getOrder = await orderModel.find()
+            return res.json(getOrder);
+        }catch(err){
+            return next(CustomeErrorHandler.failedOrder("Order details can not be fetched"))
+        }
+    },
+
+    async deleteOrder(req, res, next){
+
+    },
+
+    async updateOrder(req, res, next){
+        
     }
 }
 
