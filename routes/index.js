@@ -42,7 +42,13 @@ router.delete('/product/delete/:id', [userAuth, admin] ,deleteProduct.destroy);
 
 router.get('/product/getAll', [userAuth, admin], getAllProduct.getAll);
 
+router.get('/getAll', getAllProduct.getAll);
+
+
+
 router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
+
+router.get('/product/banner',  getAllProduct.getBanner);
 
 
 //token get
