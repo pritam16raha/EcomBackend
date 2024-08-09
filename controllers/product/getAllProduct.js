@@ -22,7 +22,7 @@ const getAllProduct = {
 
   async getBanner(req, res, next) {
     try {
-      const document = await productModel.find().select("image").select("category");
+      const document = await productModel.find().select("image").select("category").select("name").select("description");
     //   console.log(document)
 
       function extractImages(data) {
@@ -34,8 +34,29 @@ const getAllProduct = {
           return acc;
         }, []);
       }
+
+      function extractName(data){
+        return data.reduce((acc, item) => {
+          if(item.category === "banner"){
+            return acc.concat(item.name);
+          }
+          return acc;
+        }, [])
+      }
+
+      function extractDescription(data){
+        return data.reduce((acc, item) => {
+          if(item.category === "banner"){
+            return acc.concat(item.description)
+          }
+          return acc;
+        }, [])
+      }
+
       const allImages = extractImages(document);
-      return res.json({banner: allImages});
+      const allNames = extractName(document);
+      const allDesc = extractDescription(document);
+      return res.json({ image:allImages, name:allNames, description:allDesc  });
 
     } catch (err) {
       return res.json(
