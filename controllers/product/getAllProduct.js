@@ -20,6 +20,8 @@ const getAllProduct = {
     return res.json(document);
   },
 
+  //home page banner image conditions
+
   async getBanner(req, res, next) {
     try {
       const document = await productModel.find().select("image").select("category").select("name").select("description");
@@ -65,8 +67,45 @@ const getAllProduct = {
         )
       );
     }
-   
   },
+
+
+  //home page new arrivals function
+  async getNewArrivals(req, res, next){
+    try{
+      const document = await productModel.find().select("image").select("category").select("name")
+
+      function extractImage(data){
+        return data.reduce((acc, item) => {
+          //   return acc.concat(item.image);
+          if (item.category === "newArrival") {
+              return acc.concat(item.image[0]);
+            }
+            return acc;
+          }, []);
+      }
+
+      function extractName(data){
+        return data.reduce((acc, item) => {
+          //   return acc.concat(item.image);
+          if (item.category === "newArrival") {
+              return acc.concat(item.name);
+            }
+            return acc;
+          }, []);
+      }
+
+      const allImage = extractImage(document);
+      const allName = extractName(document);
+
+      return res.json({ image: allImage, name: allName })
+
+    }catch(err){
+      return res.json(CustomeErrorHandler.serverError("Error from new arrivals catch block"))
+    }
+  }
+
+
 };
 
 export default getAllProduct;

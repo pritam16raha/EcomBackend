@@ -50,6 +50,8 @@ router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
 
 router.get('/product/banner',  getAllProduct.getBanner);
 
+router.get('/product/newarrival',  getAllProduct.getNewArrivals);
+
 
 //token get
 router.get("")
