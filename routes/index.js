@@ -44,13 +44,13 @@ router.get('/product/getAll', [userAuth, admin], getAllProduct.getAll);
 
 router.get('/getAll', getAllProduct.getAll);
 
-
-
 router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
 
 router.get('/product/banner',  getAllProduct.getBanner);
 
 router.get('/product/newarrival',  getAllProduct.getNewArrivals);
+
+router.get('/product/accessories',  getAllProduct.getAccessories);
 
 
 //token get
