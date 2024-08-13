@@ -167,6 +167,50 @@ const getAllProduct = {
       );
     }
   },
+
+  async getMods(req, res, next){
+    try{
+      const document = await productModel.find().select("image").select("category").select("name").select("price");
+
+      function extractName(data){
+        return data.reduce((acc, item) => {
+          if(item.category === "mods"){
+            return acc.concat(item.name);
+          }
+          return acc;
+        }, [])
+      }
+
+      function extractPrice(data){
+        return data.reduce((acc, item) => {
+          //   return acc.concat(item.image);
+          if (item.category === "mods") {
+            return acc.concat(item.price);
+          }
+          return acc;
+        }, []);
+      }
+
+      function extractImage(data){
+        return data.reduce((acc, item) => {
+          //   return acc.concat(item.image);
+          if (item.category === "mods") {
+            return acc.concat(item.image);
+          }
+          return acc;
+        }, []);
+      }
+
+      const allNames = extractName(document);
+      const allPrice = extractPrice(document);
+      const allImages = extractImage(document);
+      
+      return res.json({ image: allImages, name: allNames, price: allPrice });
+
+    }catch(Err){
+      return res.json(CustomeErrorHandler.serverError("Error from the get mods catch block", err))
+    }
+  }
 };
 
 export default getAllProduct;
