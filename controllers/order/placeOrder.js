@@ -46,7 +46,7 @@ const placeOrder = {
                 payment_method_types:["card"],
                 line_items: line_items,
                 mode: 'payment',
-                success_url: "http://localhost:5173/order",
+                success_url: "https://ecom-frontend-eight-tau.vercel.app",
                 
                 // cancel_url: ""
             })
@@ -78,6 +78,15 @@ const placeOrder = {
             return res.json(getOrder);
         }catch(err){
             return next(CustomeErrorHandler.failedOrder("Order details can not be fetched"))
+        }
+    },
+
+    async getOrderByUser(req, res, next){
+        try{
+            const getAllOrder = await orderModel.find({  userId: req.body.id });
+            res.json({ orders: getAllOrder })
+        }catch(err){
+            return next(CustomeErrorHandler.userNotFound("Can not find the order of the selected user", err))
         }
     },
 

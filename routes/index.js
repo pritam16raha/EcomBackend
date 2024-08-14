@@ -63,6 +63,8 @@ router.post('/orderplace', userAuth, ordered.order);
 router.get('/getorder', userAuth, ordered.getPlacedOrder);
 
 router.get('/getallorder', userAuth, ordered.getAllOrder);
+
+router.post('/getorderbyuser', userAuth, ordered.getOrderByUser);
 //for payment
 router.post("/order/:id", userAuth, async(req, res) => {
     //1. total cost 2. product id: [] 3. userid
