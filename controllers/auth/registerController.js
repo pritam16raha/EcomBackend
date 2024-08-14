@@ -12,6 +12,7 @@ const registerController = {
       name: Joi.string().min(5).required(),
       email: Joi.string().email().required(),
       username: Joi.string().min(6).required(),
+      address: Joi.string().min(10),
       password: Joi.string()
         .min(6)
         .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
@@ -52,6 +53,7 @@ const registerController = {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
+      address: req.body.address,
       password: hashedPassword,
     });
 

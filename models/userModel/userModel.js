@@ -8,6 +8,7 @@ const userSchema = new MySchema({
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true },
     role: { type: String, default: 'user' },
+    address: { type: String, default: 'India' },
     password: { type: String, required: true }
 }, { timestamps: true });
 
