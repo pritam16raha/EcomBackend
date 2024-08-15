@@ -6,10 +6,21 @@ const getAllProduct = {
     let document;
 
     try {
+
+      const page = parseInt(req.query.page) || 1; // default to page 1 if not provided
+      const limit = parseInt(req.query.limit) || 6; // default to 10 items per page
+
+      // Calculate the starting index of the items for the current page
+      const startIndex = (page - 1) * limit;
+
       document = await productModel
         .find()
         .select("-password")
-        .sort({ price: 1 });
+        .sort({ price: 1 })
+        .skip(startIndex)
+        .limit(limit)
+        .exec();
+
     } catch (err) {
       return next(
         CustomeErrorHandler.serverError(
