@@ -54,6 +54,8 @@ router.get('/product/accessories',  getAllProduct.getAccessories);
 
 router.get('/product/mod',  getAllProduct.getMods);
 
+router.get('/product/productbycategory',  getAllProduct.getProductByCategory);
+
 
 //token get
 router.get("")

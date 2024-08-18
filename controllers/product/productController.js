@@ -36,7 +36,7 @@ const productController = {
             let document;
 
             try {
-                document = await productModel.create({
+                document = await productModelSchema.create({
                     name: name,
                     price: price,
                     category: category,

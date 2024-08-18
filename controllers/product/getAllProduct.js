@@ -218,10 +218,42 @@ const getAllProduct = {
       
       return res.json({ image: allImages, name: allNames, price: allPrice });
 
-    }catch(Err){
+    }catch(err){
       return res.json(CustomeErrorHandler.serverError("Error from the get mods catch block", err))
     }
-  }
+  },
+
+  async getProductByCategory(req, res, next){
+    let accessories;
+    let streetFighter;
+    let mods;
+    let newArrival;
+    let city;
+    let tourer;
+    let essentials;
+    try{
+      accessories = await productModel.find({ category: "accessories" })
+      streetFighter = await productModel.find({ category: "streetFighter" })
+      mods = await productModel.find({ category: "mods" })
+      newArrival = await productModel.find({ category: "newArrival" })
+      city = await productModel.find({ category: "city" })
+      tourer = await productModel.find({ category: "tourer" })
+      essentials = await productModel.find({ category: "essentials" })
+    }catch(err){
+      return res.json(CustomeErrorHandler.serverError("Error from catch block of get product by category",err))
+    }
+
+    try{
+      
+    }catch(err){
+      return res.json(CustomeErrorHandler.serverError("Error in sending response from get product by categories"))
+    }
+
+    return res.json({ accessories: accessories, streetFighter: streetFighter, mods: mods, newArrival: newArrival, city: city, tourer: tourer, essentials: essentials });
+  },
+
+
+
 };
 
 export default getAllProduct;
