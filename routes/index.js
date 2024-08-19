@@ -40,7 +40,7 @@ router.put('/product/edit/:id', [userAuth, admin] , editProduct.updateProduct);
 
 router.delete('/product/delete/:id', [userAuth, admin] ,deleteProduct.destroy);
 
-router.get('/product/getAll', [userAuth], getAllProduct.getAll);
+router.get('/product/getAll', getAllProduct.getAll);
 
 router.get('/getAll', getAllProduct.getAll);
 
