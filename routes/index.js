@@ -40,11 +40,11 @@ router.put('/product/edit/:id', [userAuth, admin] , editProduct.updateProduct);
 
 router.delete('/product/delete/:id', [userAuth, admin] ,deleteProduct.destroy);
 
-router.get('/product/getAll', [userAuth, admin], getAllProduct.getAll);
+router.get('/product/getAll', [userAuth], getAllProduct.getAll);
 
 router.get('/getAll', getAllProduct.getAll);
 
-router.get('/product/getOne/:id', [userAuth, admin], getOneProduct.getOne);
+router.get('/product/getOne/:id', [userAuth], getOneProduct.getOne);
 
 router.get('/product/banner',  getAllProduct.getBanner);
 
