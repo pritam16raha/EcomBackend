@@ -64,7 +64,7 @@ router.post('/orderplace', userAuth, ordered.order);
 
 router.get('/getorder', userAuth, ordered.getPlacedOrder);
 
-router.get('/getallorder', userAuth, ordered.getAllOrder);
+router.get('/getallorder', [userAuth, admin], ordered.getAllOrder);
 
 router.post('/getorderbyuser', userAuth, ordered.getOrderByUser);
 //for payment
