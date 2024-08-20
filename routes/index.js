@@ -21,13 +21,13 @@ router.get('/getalluser', [userAuth, admin],  userController.getAllUser);
 
 router.delete('/deleteuser/:id', [userAuth, admin], userController.deleteUser);
 
-router.put('/updateuser/:id', [userAuth, admin], userController.updateUser);
+router.put('/updateuser/:id', userAuth, userController.updateUser);
 
 router.post('/getAccessToken', refreshController.refreshMethod);
 
 router.post('/logout', userAuth, loginController.logout);
 
-router.get('/getuserinfo/:id', [userAuth, admin] , userController.getuserinfo);
+router.get('/getuserinfo/:id', [userAuth] , userController.getuserinfo);
 
 //product section
 

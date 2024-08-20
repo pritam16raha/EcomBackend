@@ -46,12 +46,23 @@ const userController = {
 
             const userData = req.body;
 
+            const userExist = await UserModel.findOne({ email: req.body.email });
+
+            if (userExist) {
+                return next(
+                  CustomeErrorHandler.alreadyExist(
+                    "Use Different Email, this email is already taken"
+                  )
+                );
+              }
+
             const updatedUser = await UserModel.findByIdAndUpdate({ _id: req.params.id }, {
                 $set: {
                     "name": req.body.name,
                     "email": req.body.email,
                     "username":req.body.username,
                     "role": req.body.role,
+                    "phone":req.body.phone,
                     "password": hashedPassword
                 }
             }, { new: true });
